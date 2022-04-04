@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.valentine.recyleview.databinding.ItemUserBinding
 import com.valentine.recyleview.navigation.FirstFragmentDirections
 
 
@@ -13,8 +14,8 @@ class UserAdapter(private val user: List<User>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val usernameTextView: TextView = view.findViewById(R.id.username_text_view)
-        val phoneNumberTextView: TextView = view.findViewById(R.id.phone_number_text_view)
+        val binding = ItemUserBinding.bind(view)
+//
     }
 
     //nge attach item user
@@ -25,8 +26,11 @@ class UserAdapter(private val user: List<User>) :
 
     //get data sesuai dengan posisi
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.usernameTextView.text = user[position].username
-        holder.phoneNumberTextView.text = user[position].phoneNumber.toString()
+        with(holder) {
+            binding.usernameTextView.text = user[position].username
+            binding.phoneNumberTextView.text = user[position].phoneNumber.toString()
+        }
+
         holder.itemView.setOnClickListener {
             //detail view
             val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(user[position])

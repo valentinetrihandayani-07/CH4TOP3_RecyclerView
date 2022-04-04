@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.navArgs
 import com.valentine.recyleview.R
+import com.valentine.recyleview.databinding.FragmentSecondBinding
 
 
 class SecondFragment : Fragment() {
@@ -15,23 +16,28 @@ class SecondFragment : Fragment() {
     //nav args: mengirimkan data antar destination secara aman
     private val args: SecondFragmentArgs by navArgs()
 
+    private lateinit var binding: FragmentSecondBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentSecondBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        //return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //casting data
-        val txtName = view.findViewById<TextView>(R.id.txt_name_detail)
-        val txtPhone = view.findViewById<TextView>(R.id.txt_phone_number_detail)
-        //view
-        txtName.text = args.user.username
-        txtPhone.text = args.user.phoneNumber.toString()
+        binding = FragmentSecondBinding.bind(view)
+        //casting data & view
+        binding.txtNameDetail.text = args.user.username
+        binding.txtPhoneNumberDetail.text= args.user.phoneNumber.toString()
+
+
     }
 
 

@@ -10,23 +10,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.valentine.recyleview.R
 import com.valentine.recyleview.User
 import com.valentine.recyleview.UserAdapter
+import com.valentine.recyleview.databinding.ActivityMainBinding
+import com.valentine.recyleview.databinding.FragmentFirstBinding
 
 
 class FirstFragment : Fragment() {
-
-    private lateinit var userRecyclerView: RecyclerView
+   //binding
+    private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentFirstBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false)
+       // return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userRecyclerView = view.findViewById(R.id.user_recyclerView_first)
+        binding = FragmentFirstBinding.bind(view)
+       // userRecyclerView = view.findViewById(R.id.user_recyclerView_first)
         //list data user
         val userList = listOf(
             User("Valentine", +6282234567),
@@ -39,8 +45,8 @@ class FirstFragment : Fragment() {
 
         //layout manager: mengatur tata letak daftar yang akan ditampilkan
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        userRecyclerView.layoutManager = layoutManager
-        userRecyclerView.adapter = userAdapter
+        binding.userRecyclerViewFirst.layoutManager = layoutManager
+        binding.userRecyclerViewFirst.adapter = userAdapter
 
     }
 
